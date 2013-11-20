@@ -9,28 +9,7 @@ require_relative 'missed_connections'
 class Post < ActiveRecord::Base
 end
 
-class Connection
-  #dear god this needs refactoring
-  def save_recent_missed_connections
-    city = "portland"
-    site = "http://#{city}.craigslist.org"
-    doc = Nokogiri::HTML(open("http://portland.craigslist.org/mis/index400.html"))
-    links = doc.css('.pl a') #=> returns objects like <a href="/clk/mis/4157627907.html">Ian???I think...</a>
-    links[0..100].each do |link| 
-      @post = Post.new 
-      sub_doc = Nokogiri::HTML(open("#{site}#{link['href']}"))
-      @post.title = ((sub_doc.at_css('.postingtitle')).content).strip
-      @post.body = ((sub_doc.at_css('#postingbody')).content).strip
-      if !(sub_doc.at_css('.postinginfos date')).nil?
-        @post.date_posted = ((sub_doc.at_css('.postinginfos date')).content).strip
-      elsif !(sub_doc.at_css('.postinginfos time')).nil?
-        @post.date_posted = ((sub_doc.at_css('.postinginfos time')).content).strip
-      end
-      @post.post_id = ((sub_doc.at_css('.postinginfo:nth-child(1)')).content).strip
-      @post.save
-    end
-  end
-end
+
 
 get '/' do
   @display_results = false

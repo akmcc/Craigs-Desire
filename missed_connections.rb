@@ -1,26 +1,42 @@
 class Connection
-  #dear god this needs refactoring
+
+  def initialize
+    @site = "http://portland.craigslist.org"
+  end
+  
   def save_recent_missed_connections
-    city = "portland"
-    site = "http://#{city}.craigslist.org"
-    doc = Nokogiri::HTML(open("http://portland.craigslist.org/mis/index400.html"))
-    links = doc.css('.pl a') #=> returns objects like <a href="/clk/mis/4157627907.html">Ian???I think...</a>
-    links[0..100].each do |link| 
-      @post = Post.new 
-      sub_doc = Nokogiri::HTML(open("#{site}#{link['href']}"))
-      @post.title = title(sub_doc)#((sub_doc.at_css('.postingtitle')).content).strip
-      @post.body = body(sub_doc) #((sub_doc.at_css('#postingbody')).content).strip
-      if listed_as_date?(sub_doc) #!(sub_doc.at_css('.postinginfos date')).nil?
-        @post.date_posted = date(sub_doc) #((sub_doc.at_css('.postinginfos date')).content).strip
-      elsif listed_as_time?(sub_doc) #!(sub_doc.at_css('.postinginfos time')).nil?
-        @post.date_posted = time(sub_doc) #((sub_doc.at_css('.postinginfos time')).content).strip
-      end
-      @post.post_id = post_id(sub_doc) #((sub_doc.at_css('.postinginfo:nth-child(1)')).content).strip
-      @post.save
+    doc = generate_doc 
+    links = doc.css('.pl a')
+    links.each do |link|
+      save_post_data(link)
     end
   end
 
+  def generate_doc
+    Nokogiri::HTML(open("#{@site}/mis/"))
+  end
 
+  def generate_sub_doc(link)
+    Nokogiri::HTML(open("#{@site}#{link['href']}"))
+  end
+
+  def collect_links_to_posts(doc)
+    return doc.css('.pl a')
+  end
+
+  def save_post_data(link)
+    post = Post.new
+    sub_doc = generate_sub_doc(link)
+    post.title = title(sub_doc)
+    post.body = body(sub_doc)
+    if listed_as_date?(sub_doc)
+      post.date_posted = date(sub_doc)
+    elsif listed_as_time?(sub_doc) 
+      post.date_posted = time(sub_doc)
+    end
+    post.post_id = post_id(sub_doc)
+    post.save
+  end
 
   def title(sub_doc)
     sub_doc.at_css('.postingtitle').content.strip

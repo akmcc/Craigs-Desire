@@ -3,6 +3,7 @@ require 'sinatra/activerecord'
 require './environments'
 require 'nokogiri'
 require 'open-uri'
+require 'Haml'
 require_relative 'word_count'
 require_relative 'missed_connections'
 
@@ -13,7 +14,7 @@ end
 
 get '/' do
   @display_results = false
-  erb :index
+  haml :index
 end
 
 post '/' do
@@ -23,7 +24,7 @@ post '/' do
   Post.where("body like '% #{@search_term} %'").each do |post|
     @results << post
   end
-  erb :index
+  haml :index
 end
 
 get '/stats' do

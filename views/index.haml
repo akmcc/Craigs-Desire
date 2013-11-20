@@ -1,0 +1,14 @@
+!!!
+%html
+%head
+  %title Dataz
+%body
+  %a(href="/stats")Stats
+  %h1 Here we are
+  %form{:action=> "/", :method=> "post"}
+    %label{:for=> "search"} Look for
+    %input{:type=> "text", :name=> "search"}
+    %input{:type=> "submit", :value=> "in the psyche of the lonely."}
+  - if @display_results
+    = erb :_results
+ 

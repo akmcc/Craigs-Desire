@@ -35,7 +35,10 @@ get '/stats' do
     body_text << post.body
   end
   @word_counts = WordCount.new(body_text).word_count.sort_by{|word, quantity| quantity}
-
+  @m4m = Post.where("title like '% m4m %'").count
+  @m4w = Post.where("title like '% m4w %'").count
+  @w4w = Post.where("title like '% w4w %'").count
+  @w4m = Post.where("title like '% w4m %'").count
   haml :stats
 end
 

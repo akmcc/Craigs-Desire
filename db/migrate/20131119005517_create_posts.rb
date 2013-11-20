@@ -8,7 +8,7 @@ class CreatePosts < ActiveRecord::Migration
     end
   end
 
-  def down
+  def self.down
     drop_table :posts
   end
 end

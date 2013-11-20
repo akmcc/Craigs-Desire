@@ -36,7 +36,7 @@ get '/stats' do
   end
   @word_counts = WordCount.new(body_text).word_count.sort_by{|word, quantity| quantity}
 
-  erb :stats
+  haml :stats
 end
 
 get '/add_more_data' do

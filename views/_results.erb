@@ -1,0 +1,20 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <% if @results.size == 0 %>
+    I haven't found any references of that yet.
+  <% else %>
+    <% if @results.size == 1 %>
+      <p>One post mentions <%= @search_term %></p>
+    <% else %>
+      <p><%= @results.size %> posts mention <%= @search_term %></p>
+    <% end %>
+    <% @results.each do |result| %>
+      <h3><%= result.title %></h3>
+      <p><%= result.body %></p>
+    <% end %>
+  <% end %>
+</body>
+</html>

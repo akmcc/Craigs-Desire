@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+<p>This data comes from <%= @all_posts.size %> missed connection posts in and around Portland, OR posted between <%= @all_posts.last.date_posted %> and <%=@all_posts.first.date_posted %>.</p>
+
+<p>The most commonly used (non-utility) words are:</p>
+<ul>
+<li>'<%= @word_counts[-1][0]%>', being used <%= @word_counts[-1][1]%> times.</li>
+<li>'<%= @word_counts[-2][0]%>', being used <%= @word_counts[-2][1]%> times.</li>
+<li>'<%= @word_counts[-3][0]%>', being used <%= @word_counts[-3][1]%> times.</li>
+<li>'<%= @word_counts[-4][0]%>', being used <%= @word_counts[-4][1]%> times.</li>
+
+</body>
+</html>

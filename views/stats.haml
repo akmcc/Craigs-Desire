@@ -1,20 +1,17 @@
 !!!
 %html
 %body
-  %p This data comes from #{@all_posts.size} missed connection posts in and around Portland, OR posted between #{@all_posts.last.date_posted} and #{@all_posts.first.date_posted}.
+  %p This data comes from #{post_count} missed connection posts in and around Portland, OR posted between #{earliest_date} and #{latest_date}.
 
 %p The most commonly used (non-utility) words are:
 %ul
-  %li'#{@word_counts[-1][0]}', being used #{@word_counts[-1][1]} times.
-  %li'#{@word_counts[-2][0]}', being used #{@word_counts[-2][1]} times.
-  %li'#{@word_counts[-3][0]}', being used #{@word_counts[-3][1]} times.
-  %li'#{@word_counts[-4][0]}', being used #{@word_counts[-4][1]} times.
+  %li #{common_word("first")}, being used #{common_word_count("first")} times.
+  %li #{common_word("second")}, being used #{common_word_count("second")} times.
+  %li #{common_word("third")}, being used #{common_word_count("third")} times.
+  %li #{common_word("fourth")}, being used #{common_word_count("fourth")} times.
 
-%p #{@m4m} of the #{@all_posts.size} posts were from men seeking men.
-%p #{@m4w} were from men seeking women.  
-%p #{@w4w} were from women seeking women.  
-%p #{@w4m} were from women seeking men.
+%p #{count("m4m")} of the #{post_count} posts were from men seeking men.
+%p #{count("m4w")} were from men seeking women.  
+%p #{count("w4w")} were from women seeking women.  
+%p #{count("w4m")} were from women seeking men.
 %p The rest did not specify.  
-
--# blank percent of the posts are posted by men looking for women
--# blank percent are women looking for men, etc

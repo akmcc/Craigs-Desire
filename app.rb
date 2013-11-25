@@ -7,6 +7,7 @@ require 'Haml'
 require_relative 'word_count'
 require_relative 'missed_connections'
 require_relative 'helpers'
+require 'googlecharts'
 
 class Post < ActiveRecord::Base
 end

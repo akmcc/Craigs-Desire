@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'nokogiri'
+gem 'googlecharts'
 
 group :development do 
   gem 'sqlite3'

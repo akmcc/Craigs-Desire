@@ -1,3 +1,5 @@
+
+
 helpers do
   def common_word(place)
     if place == "first"
@@ -37,6 +39,14 @@ helpers do
 
   def count(whom_for_who)
     Post.where("title like '% #{whom_for_who} %'").count
+  end
+
+  def who4who_graph
+    Gchart.pie(:size => '400x200', :data => [count('m4m'), count('m4w'), count('w4w'), count('w4m'), number_of_unspecified], :legend => ['men4men', 'men4women', 'women4women', 'women4men', 'unspecified'], :title => 'Who seeks whom')
+  end
+
+  def number_of_unspecified
+    Post.all.count - (count('m4m') + count('m4w') + count('w4w') + count('w4m'))
   end
 
 

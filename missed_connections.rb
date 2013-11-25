@@ -1,3 +1,4 @@
+#need to rename doc, sub_doc, Connection to something more descrptive 
 class Connection
 
   def initialize

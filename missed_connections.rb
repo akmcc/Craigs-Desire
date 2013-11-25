@@ -13,16 +13,14 @@ class Connection
     end
   end
 
+  private
+
   def generate_doc
-    Nokogiri::HTML(open("#{@site}/mis/"))
+    Nokogiri::HTML(open("#{@site}/mis/index200.html"))
   end
 
   def generate_sub_doc(link)
     Nokogiri::HTML(open("#{@site}#{link['href']}"))
-  end
-
-  def collect_links_to_posts(doc)
-    return doc.css('.pl a')
   end
 
   def save_post_data(link)

@@ -3,12 +3,10 @@
 %body
   
   %a(href="/stats")Stats
-  %div
-    %h1 Here we are
-    %form{:action=> "/", :method=> "post"}
-      %label{:for=> "search"} Look for
-      %input{:type=> "text", :name=> "search", :class => "topcoat-text-input--large"}
-      %input{:type=> "submit", :class =>"topcoat-button--large--cta", :value=> "in the psyche of the lonely."}
-    - if @display_results
-      = haml :_results
+  %form{:action=> "/", :method=> "post"}
+    %label{:for=> "search"} Look for
+    %input{:type=> "text", :name=> "search", :class => "topcoat-text-input--large"}
+    %input{:type=> "submit", :class =>"topcoat-button--large--cta", :value=> "in the psyche of the lonely."}
+  - if @display_results
+    = haml :_results
  

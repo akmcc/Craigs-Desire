@@ -7,7 +7,7 @@
     - if @results.size == 1
       %p One post mentions '#{@search_term}'
     - else
-      %p= #{@results.size} posts mention '#{@search_term}'
+      %p #{@results.size} posts mention '#{@search_term}'
     - @results.each do |result|
       %h3= result.title
       %p= result.body

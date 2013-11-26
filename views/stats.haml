@@ -3,11 +3,7 @@
 %body
   %p This data comes from #{post_count} missed connection posts in and around Portland, OR posted between #{earliest_date} and #{latest_date}.
 
-%p The most commonly used (non-utility) words are:
-%ul
-  %li #{common_word("first")}, being used #{common_word_count("first")} times.
-  %li #{common_word("second")}, being used #{common_word_count("second")} times.
-  %li #{common_word("third")}, being used #{common_word_count("third")} times.
-  %li #{common_word("fourth")}, being used #{common_word_count("fourth")} times.
+
+%img{:src => "#{word_freq_graph}"}  
 
 %img{:src=> "#{who4who_graph}"}

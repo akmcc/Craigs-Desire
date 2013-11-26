@@ -7,11 +7,11 @@ require 'Haml'
 require_relative 'word_count'
 require_relative 'missed_connections'
 require_relative 'helpers'
+
 require 'googlecharts'
 
 class Post < ActiveRecord::Base
 end
-
 
 get '/' do
   @display_results = false
@@ -35,7 +35,7 @@ get '/stats' do
     @all_posts << post
     body_text << post.body
   end
-  @word_counts = WordCount.new(body_text).word_count.sort_by{|word, quantity| quantity}
+  @word_counts = WordCount.new(body_text).word_count
   haml :stats
 end
 

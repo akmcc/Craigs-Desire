@@ -1,0 +1,16 @@
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+img {
+  float: left;
+}
+
+label {
+  font-size: 24px;
+}
+
+body {
+  background-color: #dfe2e2;
+}

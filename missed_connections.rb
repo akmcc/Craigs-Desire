@@ -16,7 +16,7 @@ class Connection
   private
 
   def generate_doc
-    Nokogiri::HTML(open("#{@site}/mis/index200.html"))
+    Nokogiri::HTML(open("#{@site}/mis/"))
   end
 
   def generate_sub_doc(link)

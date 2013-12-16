@@ -1,7 +1,7 @@
-require_relative 'word_count'
 require_relative 'missed_connections'
 require_relative 'helpers'
 require_relative 'language_processing'
+require_relative 'data'
 
 class Post < ActiveRecord::Base
 end
@@ -23,13 +23,21 @@ post '/' do
 end
 
 get '/stats' do
-  @all_posts = []
-  body_text = ""
+  all_posts = []
   Post.all.each do |post|
-    @all_posts << post
-    body_text << post.body
+    all_posts << post
   end
-  @word_counts = WordCount.new(body_text).word_count
+  @data = PostData.new(all_posts)
+  @post_count = @data.data_source.size
+  @first_post_date = @data.first_and_last[0]
+  @last_post_date = @data.first_and_last[-1]
+
+  # @all_posts = []
+  # body_text = ""
+  # Post.all.each do |post|
+  #   @all_posts << post
+  #   body_text << post.body
+  # end
   @generic_post = LangProc.new.generic_post
   @common_adjectives = LangProc.new.adjective_popularity
   haml :stats

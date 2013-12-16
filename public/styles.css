@@ -1,10 +1,14 @@
 .container {
   max-width: 900px;
   margin: auto;
+  margin-bottom: 100px;
+  font-family: sans-serif;
+  color: white;
 }
 
 img {
   float: left;
+  margin-bottom: 30px;
 }
 
 label {
@@ -12,5 +16,39 @@ label {
 }
 
 body {
-  background-color: #dfe2e2;
+  margin-top: 80px;
+  background-color: #303030;
+}
+
+a {
+  color: white;
+}
+
+h3 {
+  clear: left;
+}
+
+p {
+  margin-bottom: 50px;
+}
+
+.search {
+  width: 800px;
+  height: 120px;
+  font-size: 32px;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 800;
+  border: 10px solid black;
+  color: #303030;
+}
+
+.button {
+  width: 400px;
+  height: 60px;
+  font-size: 24px;
+  text-align: center;
+  margin: 30px auto;
+  font-weight: 400;
+  border: 5px solid black;
 }

@@ -1,20 +1,14 @@
-require 'sinatra'
-require 'sinatra/activerecord'
-require './environments'
-require 'nokogiri'
-require 'open-uri'
-require 'Haml'
 require_relative 'word_count'
 require_relative 'missed_connections'
 require_relative 'helpers'
-
-require 'googlecharts'
+require_relative 'language_processing'
 
 class Post < ActiveRecord::Base
 end
 
 get '/' do
   @display_results = false
+  @button_text = rand(2)
   haml :index
 end
 
@@ -22,7 +16,7 @@ post '/' do
   @display_results = true
   @results = []
   @search_term = params[:search]
-  Post.where("body like '% #{@search_term} %'").each do |post|
+  Post.where("body like '%#{@search_term}%'").each do |post|
     @results << post
   end
   haml :index
@@ -36,6 +30,8 @@ get '/stats' do
     body_text << post.body
   end
   @word_counts = WordCount.new(body_text).word_count
+  @generic_post = LangProc.new.generic_post
+  @common_adjectives = LangProc.new.adjective_popularity
   haml :stats
 end
 

@@ -4,9 +4,11 @@
   
   %a(href="/stats")Stats
   %form{:action=> "/", :method=> "post"}
-    %label{:for=> "search"} Look for
-    %input{:type=> "text", :name=> "search", :class => "topcoat-text-input--large"}
-    %input{:type=> "submit", :class =>"topcoat-button--large--cta", :value=> "in the psyche of the lonely."}
+    %input{:type=> "text", :name=> "search", :placeholder=> "Search the thoughts of the lonely and lustful.", :class=>"search"}
+    - if @button_text == 0
+      %input{:type=> "submit", :value=> "This will be sad.", :class => "button"}
+    - else
+      %input{:type=> "submit", :value=> "This will be funny.", :class => "button"}
   - if @display_results
     = haml :_results
  

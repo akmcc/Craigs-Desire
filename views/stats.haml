@@ -1,9 +1,20 @@
 !!!
 %html
 %body
-  %p This data comes from #{post_count} missed connection posts in and around Portland, OR posted between #{earliest_date} and #{latest_date}.
+  %p This data comes from #{post_count} missed connection posts in and around Portland, OR posted between #{first_and_last_posts[0]} and #{first_and_last_posts[1]}.
 
 
 %img{:src => "#{word_freq_graph}"}  
 
 %img{:src=> "#{who4who_graph}"}
+
+%h3 The 50 most common adjectives are:
+
+%p #{@common_adjectives[0..50]}
+
+%img{:src=> "#{day_of_week_graph}"}
+
+%h3 Based on these #{post_count} posts, a generic missed connection post might look like this: 
+
+%p #{@generic_post}
+

@@ -1,20 +1,36 @@
 !!!
 %html
 %body
-  %p This data comes from #{@post_count} missed connection posts in and around Portland, OR posted between #{@first_post_date} and #{@last_post_date}.
+  %p This data comes from #{@pdx_count} missed connection posts from Portland, OR and #{@nyc_count} posts from New York City.
+ 
+%img{:src=> "#{pdx_who4who_graph}"}
 
+%img{:src=> "#{nyc_who4who_graph}"}
 
-%img{:src => "#{word_freq_graph}"}  
+%h2 The most common nouns are:
 
-%img{:src=> "#{who4who_graph}"}
+%div{:class=> "nouns"}
+  %h2 PDX 
+  %ul
+  - @pdx_nouns.each do |noun, value|
+    %li= noun
 
-%h3 The 50 most common adjectives are:
+%div{:class=> "nouns"}
+  %h2 NYC
+  - @nyc_nouns.each do |noun, value|
+    %li= noun
 
-%p #{@common_adjectives[0..50]}
+%p #{@common_adjectives}
 
-%img{:src=> "#{day_of_week_graph}"}
+%img{:src=> "#{pdx_day_of_week_graph}"}
 
-%h3 Based on these #{@post_count} posts, a generic missed connection post might look like this: 
+%img{:src=> "#{nyc_day_of_week_graph}"}
 
-%p #{@generic_post}
+%h2 A generic missed connection post from PDX might look like this: 
+
+%p #{@generic_pdx}
+
+%h2 A generic missed connection post from NYC might look like this:
+
+%p #{@generic_nyc}
 

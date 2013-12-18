@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119005517) do
+ActiveRecord::Schema.define(version: 20131218202501) do
 
   create_table "posts", force: true do |t|
     t.string "title"
     t.text   "body"
     t.string "date_posted"
     t.string "post_id"
+    t.string "city"
+  end
+
+  create_table "stats", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "pdx_probability"
+    t.text     "pdx_nouns"
+    t.text     "nyc_probability"
+    t.text     "nyc_nouns"
   end
 
 end

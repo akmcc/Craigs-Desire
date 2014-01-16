@@ -7,6 +7,7 @@ It is a Sinatra application that scrapes data from the missed connections forum 
 
 ## TODOS:
 1. Improve performace (incredibly slow)
-2. Use Google Chart API (JS) in place of Google_Visualr gem
-3. The naming of things!
-4. Deploy
+2. Remove duplicate code between NYC and PDX 
+3. Use Google Chart API (JS) in place of Google_Visualr gem
+4. The naming of things!
+5. Deploy

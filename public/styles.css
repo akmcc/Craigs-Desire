@@ -6,22 +6,24 @@
   color: #303030;
 }
 
-img {
-  float: left;
-  margin-bottom: 30px;
-}
-
 label {
   font-size: 24px;
 }
 
 body {
   margin-top: 80px;
-  background-color: #b0b0b0;
+}
+
+h1 {
+  font-size: 72px;
+  display: inline;
 }
 
 a {
-  color: white;
+  color: black;
+  float: right;
+  margin-right: 100px;
+  margin-top: 55px;
 }
 
 h2 {
@@ -61,6 +63,22 @@ p {
   float:left;
   margin-bottom: 30px;
   text-align: center;
+}
+
+.bar-chart {
+  clear: left;
+  margin: 20px;
+}
+
+.post {
+  margin-bottom: 20px;
+}
+
+
+div.pie-chart {
+  display: inline;
+  float: left;
+  margin-left: -30px;
 }
 
 li {

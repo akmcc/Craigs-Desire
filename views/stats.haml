@@ -1,12 +1,19 @@
 !!!
 %html
 %body
-  %p This data comes from #{@pdx_count} missed connection posts from Portland, OR and #{@nyc_count} posts from New York City.
+
+%h2 This data comes from #{@pdx_count} missed connection posts from Portland, OR and #{@nyc_count} posts from New York City.
+
+%div{:class=> 'pie-chart'}
+  %div{:id => 'pdx_who_chart'}
+  - pdx_who_chart
+  = @pdx_who_chart.to_js('pdx_who_chart')
+
+%div{:class=> 'pie-chart'}
+  %div{:id => 'nyc_who_chart'}
+  - nyc_who_chart
+  = @nyc_who_chart.to_js('nyc_who_chart')
  
-%img{:src=> "#{pdx_who4who_graph}"}
-
-%img{:src=> "#{nyc_who4who_graph}"}
-
 %h2 The most common nouns are:
 
 %div{:class=> "nouns"}
@@ -20,17 +27,21 @@
   - @nyc_nouns.each do |noun, value|
     %li= noun
 
-%p #{@common_adjectives}
+%div{:id => 'day_chart', :class=> 'bar-chart'}
+- day_of_week_chart
+= @day_chart.to_js('day_chart')
 
-%img{:src=> "#{pdx_day_of_week_graph}"}
+%div{:id => 'time_chart', :class=> 'bar-chart'}
+- hour_of_day_chart
+= @time_chart.to_js('time_chart')
 
-%img{:src=> "#{nyc_day_of_week_graph}"}
+%div{:class =>'post'}
+  %h2 A generic missed connection post from PDX might look like this: 
 
-%h2 A generic missed connection post from PDX might look like this: 
+  %p #{@generic_pdx}
 
-%p #{@generic_pdx}
+%div{:class =>'post'}
+  %h2 A generic missed connection post from NYC might look like this:
 
-%h2 A generic missed connection post from NYC might look like this:
-
-%p #{@generic_nyc}
+  %p #{@generic_nyc}
 

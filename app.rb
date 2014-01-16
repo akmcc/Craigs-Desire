@@ -5,16 +5,13 @@ require_relative 'data'
 require 'sinatra/activerecord'
 require 'sinatra'
 require './environments'
-
-
-
+require 'google_visualr'
 
 class Post < ActiveRecord::Base
 end
 
 class Stats < ActiveRecord::Base
 end
-
 
 get '/' do
   @display_results = false
@@ -26,6 +23,7 @@ post '/' do
   @display_results = true
   @results = []
   @search_term = params[:search]
+  # fix this vulnerability to sql injection
   Post.where("body like '%#{@search_term}%'").each do |post|
     @results << post
   end
@@ -48,9 +46,8 @@ get '/stats' do
 end
 
 get '/add_more_data' do
-  # data = Connection.new
-  # data.save_recent_missed_connections
+  data = Connection.new
+  data.save_recent_missed_connections
   LangProcessor.new.update_stats
-  "Hello"
-
+  "Done"
 end

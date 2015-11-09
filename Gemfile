@@ -7,12 +7,14 @@ gem 'sinatra-activerecord'
 gem 'nokogiri'
 gem 'googlecharts'
 gem 'google_visualr', '>= 2.1'
+gem 'haml'
+gem 'treat'
 
-group :development do 
+group :development do
   gem 'sqlite3'
   gem 'tux'
 end
 
-group :production do 
+group :production do
   gem 'pg'
 end

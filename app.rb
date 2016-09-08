@@ -8,12 +8,10 @@ require 'googlecharts'
 
 require_relative './environments'
 require_relative 'missed_connections'
+require_relative 'post'
 require_relative 'helpers'
 require_relative 'language_processing'
 require_relative 'data'
-
-class Post < ActiveRecord::Base
-end
 
 class Stats < ActiveRecord::Base
 end

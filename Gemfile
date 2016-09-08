@@ -11,6 +11,7 @@ gem 'haml'
 gem 'treat'
 gem 'scalpel'
 gem 'engtagger'
+gem "rspec"
 
 group :development do
   gem 'sqlite3'

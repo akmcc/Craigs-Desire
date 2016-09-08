@@ -1,14 +1,12 @@
 !!!
 %html
 %body
-  
-  %a(href="/stats")Stats
+  %a(href="/stats")Stats 
   %form{:action=> "/", :method=> "post"}
     %input{:type=> "text", :name=> "search", :placeholder=> "Search the thoughts of the lonely and lustful.", :class=>"search"}
     - if @button_text == 0
       %input{:type=> "submit", :value=> "This will be sad.", :class => "button"}
     - else
-      %input{:type=> "submit", :value=> "This will be funny.", :class => "button"}
+      %input{:type=> "submit", :value=> "This will be funny.", :class => "button"}  
   - if @display_results
     = haml :_results
- 

@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218202501) do
+ActiveRecord::Schema.define(version: 20151113034047) do
 
   create_table "posts", force: true do |t|
-    t.string "title"
-    t.text   "body"
-    t.string "date_posted"
-    t.string "post_id"
-    t.string "city"
+    t.string   "title"
+    t.text     "body"
+    t.string   "city"
+    t.datetime "posted_at"
+    t.string   "craigslist_id"
+    t.string   "category"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "stats", force: true do |t|

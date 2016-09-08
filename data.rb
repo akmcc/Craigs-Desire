@@ -9,7 +9,7 @@ class DataAnalyzer
   def  first_and_last
     times = []
     @data_source.each do |post|
-      times << Time.parse(post.date_posted)
+      times << post.posted_at
     end
     [times.sort[0].asctime, times.sort[-1].asctime]
   end
@@ -32,7 +32,7 @@ class DataAnalyzer
     wday = get_wday(day_of_week)
 
     @data_source.each do |post|
-      if wday == Time.parse(post.date_posted).wday
+      if wday == post.posted_at.wday
         count += 1
       end
     end
@@ -46,7 +46,7 @@ class DataAnalyzer
   #tells you how many mondays (or whatever day) exists in the db
   def how_many(day_of_week)
     wday = get_wday(day_of_week)
-    @data_source.map {|post| Time.parse(post.date_posted).yday if Time.parse(post.date_posted).wday == wday }.compact.uniq.size
+    @data_source.map {|post| post.posted_at.wday if post.posted_at.wday == wday }.compact.uniq.size
   end
 
   def post_count
@@ -54,7 +54,7 @@ class DataAnalyzer
   end
 
   def count_who_for_whom(who_for_whom)
-    @data_source.where("title like '%#{who_for_whom}%'").count
+    @data_source.where(category: who_for_whom).count
   end
 
   def number_of_unspecified
@@ -74,6 +74,6 @@ class DataAnalyzer
   # quarter_of_day: 1 for hours 0 - 5, 2 for 6 - 11, 3 for 12 -17, 4 for 18 - 23
   def time_of_day(quarter_of_day)
     hours = get_hours(quarter_of_day)
-    @data_source.select { |post| hours.include? Time.parse(post.date_posted).hour}.count
+    @data_source.select { |post| hours.include? post.posted_at.hour}.count
   end
 end

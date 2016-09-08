@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113034047) do
+ActiveRecord::Schema.define(version: 20160229001154) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20151113034047) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "day_of_week"
   end
 
   create_table "stats", force: true do |t|

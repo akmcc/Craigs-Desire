@@ -6,61 +6,6 @@ class DataAnalyzer
     @data_source = data_source
   end
 
-  def  first_and_last
-    times = []
-    @data_source.each do |post|
-      times << post.posted_at
-    end
-    [times.sort[0].asctime, times.sort[-1].asctime]
-  end
-
-  def get_wday(day_of_week)
-    case day_of_week.downcase
-    when "sunday" then 0
-    when "monday" then 1
-    when "tuesday" then 2
-    when "wednesday" then 3
-    when "thursday" then 4
-    when "friday" then 5
-    when "saturday" then 6
-    end
-  end
-
-  def posts_from(day_of_week)
-    count = 0
-
-    wday = get_wday(day_of_week)
-
-    @data_source.each do |post|
-      if wday == post.posted_at.wday
-        count += 1
-      end
-    end
-    if how_many(day_of_week) > 0
-      return count / how_many(day_of_week)
-    else
-      return 0
-    end
-  end
-
-  #tells you how many mondays (or whatever day) exists in the db
-  def how_many(day_of_week)
-    wday = get_wday(day_of_week)
-    @data_source.map {|post| post.posted_at.wday if post.posted_at.wday == wday }.compact.uniq.size
-  end
-
-  def post_count
-    @data_source.size
-  end
-
-  def count_who_for_whom(who_for_whom)
-    @data_source.where(category: who_for_whom).count
-  end
-
-  def number_of_unspecified
-    @data_source.count - (count_who_for_whom('m4m') + count_who_for_whom('m4w') + count_who_for_whom('w4w') + count_who_for_whom('w4m'))
-  end
-
 
   def get_hours(quarter_of_day)
     case quarter_of_day

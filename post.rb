@@ -6,6 +6,43 @@ require_relative './environments'
 
 class Post < ActiveRecord::Base
 
+  ### Datasets
+
+  def self::portland
+      return self.where("city like '%portland%'")
+  end
+
+  def self::new_york
+    return self.where("city like '%new york%'")
+  end
+
+  def self::for_category( category )
+    return self.where( category: category )
+  end
+
+  def self::unknown_category
+    return self.where.not(category: ['m4m', 'm4w', 'w4w', 'w4m'])
+  end
+
+  def self::posted_on_day_of_week( day_of_week )
+
+    if day_of_week.is_a?( String )
+      day_of_week = case day_of_week.downcase
+        when "sunday" then 0
+        when "monday" then 1
+        when "tuesday" then 2
+        when "wednesday" then 3
+        when "thursday" then 4
+        when "friday" then 5
+        when "saturday" then 6
+      end
+    end
+
+    return self.where( day_of_week: day_of_week )
+  end
+
+  ### end dataset methods
+
   def self::from_craigslist_html(html)
     post = Post.new
 

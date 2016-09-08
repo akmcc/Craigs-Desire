@@ -36,10 +36,14 @@ class Craigslust < Sinatra::Base
 
   get '/stats' do
     @language = LangProcessor.new
-    @pdx_analyzer = DataAnalyzer.new(Post.where(city: "Portland"))
-    @nyc_analyzer = DataAnalyzer.new(Post.where(city: "New York City"))
-    @pdx_count = @pdx_analyzer.post_count
-    @nyc_count = @nyc_analyzer.post_count
+
+    # can get rid of these as soon as I create a real dataset for
+    # filtering by the time of day they were posted
+    @pdx_analyzer = DataAnalyzer.new(Post.portland)
+    @nyc_analyzer = DataAnalyzer.new(Post.new_york)
+
+    @pdx_count = Post.portland.count
+    @nyc_count = Post.new_york.count
     @pdx_prob = @language.pdx_prob
     @nyc_prob = @language.nyc_prob
     @pdx_nouns = @language.most_common_nouns(@language.pdx_nouns)

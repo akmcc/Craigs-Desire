@@ -1,7 +1,5 @@
 class DataAnalyzer
 
-  #seems like a bizzarely thrown together class.. need to think about this one
-
   attr_reader :data_source
 
   def initialize(data_source)
@@ -41,7 +39,7 @@ class DataAnalyzer
     count / how_many(day_of_week)
   end
 
-  #tells you how many mondays (for example) exists in the db
+  #tells you how many mondays (or whatever day) exists in the db
   def how_many(day_of_week)
     wday = get_wday(day_of_week)
     @data_source.map {|post| Time.parse(post.date_posted).yday if Time.parse(post.date_posted).wday == wday }.compact.uniq.size
@@ -60,4 +58,18 @@ class DataAnalyzer
   end
 
 
+  def get_hours(quarter_of_day)
+    case quarter_of_day
+    when 1 then (0..5)
+    when 2 then (6..11)
+    when 3 then (12..17)
+    when 4 then (18..23)
+    end
+  end
+
+  # quarter_of_day: 1 for hours 0 - 5, 2 for 6 - 11, 3 for 12 -17, 4 for 18 - 23
+  def time_of_day(quarter_of_day)
+    hours = get_hours(quarter_of_day)
+    @data_source.select { |post| hours.include? Time.parse(post.date_posted).hour}.count
+  end
 end

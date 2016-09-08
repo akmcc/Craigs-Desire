@@ -1,4 +1,3 @@
-#need to rename doc, sub_doc, Connection to something more descrptive 
 class Connection
 
   def initialize
@@ -16,7 +15,7 @@ class Connection
   private
 
   def generate_doc
-    Nokogiri::HTML(open("#{@site}/mis/"))
+    Nokogiri::HTML(open("#{@site}/mis/index300.html"))
   end
 
   def generate_sub_doc(link)
@@ -34,6 +33,7 @@ class Connection
       post.date_posted = time(sub_doc)
     end
     post.post_id = post_id(sub_doc)
+    post.city = "Portland"
     post.save
   end
 

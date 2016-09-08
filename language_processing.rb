@@ -57,11 +57,11 @@ def find_probability(counted_bigrams)
     end
     probability
   end
-  
+
   def count_bigrams(tokenized_stories)
     count = {}
     tokenized_stories.each do |sent|
-      sent = ["None"] + sent 
+      sent = ["None"] + sent
       # creates the bigrams by zipping the sentenece together w/ subset of sentence
       sent.zip(sent[1..-1]).each do |current, on_deck|
         count[current] ||= {}
@@ -87,7 +87,7 @@ def find_probability(counted_bigrams)
     unique_words.each do |w|
       word_frequency[w] = document.frequency_of(w)
     end
-    word_frequency 
+    word_frequency
   end
 
   def find_noun_popularity(word_frequency_hash)

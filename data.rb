@@ -22,7 +22,7 @@ class DataAnalyzer
     when "wednesday" then 3
     when "thursday" then 4
     when "friday" then 5
-    when "saturday" then 6  
+    when "saturday" then 6
     end
   end
 
@@ -30,13 +30,17 @@ class DataAnalyzer
     count = 0
 
     wday = get_wday(day_of_week)
- 
+
     @data_source.each do |post|
       if wday == Time.parse(post.date_posted).wday
         count += 1
       end
     end
-    count / how_many(day_of_week)
+    if how_many(day_of_week) > 0
+      return count / how_many(day_of_week)
+    else
+      return 0
+    end
   end
 
   #tells you how many mondays (or whatever day) exists in the db
@@ -45,7 +49,7 @@ class DataAnalyzer
     @data_source.map {|post| Time.parse(post.date_posted).yday if Time.parse(post.date_posted).wday == wday }.compact.uniq.size
   end
 
-  def post_count 
+  def post_count
     @data_source.size
   end
 

@@ -1,30 +1,32 @@
 class Connection
 
   def initialize
-    @site = "http://portland.craigslist.org"
+    @sites = ["http://portland.craigslist.org", "http://newyork.craigslist.org"]
   end
-  
+
   def save_recent_missed_connections
-    doc = generate_doc 
-    links = doc.css('.pl a')
-    links.each do |link|
-      save_post_data(link)
+    @sites.each do |site|
+      doc = generate_doc(site)
+      links = doc.css('.pl a')
+      links.each do |link|
+        save_post_data(site, link)
+      end
     end
   end
 
   private
 
-  def generate_doc
-    Nokogiri::HTML(open("#{@site}/mis/index300.html"))
+  def generate_doc(site)
+    Nokogiri::HTML(open("#{site}/mis/index300.html"))
   end
 
-  def generate_sub_doc(link)
-    Nokogiri::HTML(open("#{@site}#{link['href']}"))
+  def generate_sub_doc(site, link)
+    Nokogiri::HTML(open("#{site}#{link['href']}"))
   end
 
-  def save_post_data(link)
+  def save_post_data(site, link)
     post = Post.new
-    sub_doc = generate_sub_doc(link)
+    sub_doc = generate_sub_doc(site, link)
     post.title = title(sub_doc)
     post.body = body(sub_doc)
     if listed_as_date?(sub_doc)
@@ -33,7 +35,8 @@ class Connection
       post.date_posted = time(sub_doc)
     end
     post.post_id = post_id(sub_doc)
-    post.city = "Portland"
+    city = site.include?("portland") ? "Portland" : "New York City"
+    post.city = city
     post.save
   end
 

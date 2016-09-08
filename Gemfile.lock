@@ -21,6 +21,7 @@ GEM
     birch (0.0.8)
     bond (0.4.3)
     builder (3.1.4)
+    engtagger (0.2.0)
     google_visualr (2.2.0)
     googlecharts (1.6.8)
     haml (4.0.7)
@@ -49,6 +50,7 @@ GEM
       rack-test (>= 0.5)
       ripl (>= 0.3.5)
     rubyzip (0.9.9)
+    scalpel (0.2.1)
     schiphol (1.0.1)
       progressbar (>= 0.10.0)
       rubyzip (~> 0.9.9)
@@ -82,11 +84,13 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  engtagger
   google_visualr (>= 2.1)
   googlecharts
   haml
   nokogiri
   pg
+  scalpel
   sinatra
   sinatra-activerecord
   sqlite3

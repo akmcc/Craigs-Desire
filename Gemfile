@@ -9,6 +9,8 @@ gem 'googlecharts'
 gem 'google_visualr', '>= 2.1'
 gem 'haml'
 gem 'treat'
+gem 'scalpel'
+gem 'engtagger'
 
 group :development do
   gem 'sqlite3'

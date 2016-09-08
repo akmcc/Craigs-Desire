@@ -7,10 +7,12 @@ class LangProcessor
   attr_reader :pdx_prob, :nyc_prob, :pdx_nouns, :nyc_nouns
 
   def initialize
-    @pdx_prob = Marshal.load(Stats.last.pdx_probability)
-    @nyc_prob = Marshal.load(Stats.last.nyc_probability)
-    @pdx_nouns = Marshal.load(Stats.last.pdx_nouns)
-    @nyc_nouns = Marshal.load(Stats.last.nyc_nouns)
+    if Stats.last
+      @pdx_prob = Marshal.load(Stats.last.pdx_probability)
+      @nyc_prob = Marshal.load(Stats.last.nyc_probability)
+      @pdx_nouns = Marshal.load(Stats.last.pdx_nouns)
+      @nyc_nouns = Marshal.load(Stats.last.nyc_nouns)
+    end
   end
 
   def generic_post(probabilities)
@@ -114,7 +116,7 @@ def find_probability(counted_bigrams)
     get_text_from("New York City")
     pdx_doc = document 'Portland_text.txt'
     nyc_doc = document 'NewYorkCity_text.txt'
-    stat = Stats.last
+    stat = Stats.last || Stats.new
     stat.pdx_probability = Marshal.dump(find_probability(count_bigrams(tokenize(pdx_doc))))
     stat.nyc_probability = Marshal.dump(find_probability(count_bigrams(tokenize(nyc_doc))))
     stat.pdx_nouns = Marshal.dump(find_noun_popularity(find_word_popularity(pdx_doc)))

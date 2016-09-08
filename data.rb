@@ -1,4 +1,6 @@
-class PostData
+class DataAnalyzer
+
+  #seems like a bizzarely thrown together class.. need to think about this one
 
   attr_reader :data_source
 
@@ -14,23 +16,35 @@ class PostData
     [times.sort[0].asctime, times.sort[-1].asctime]
   end
 
+  def get_wday(day_of_week)
+    case day_of_week.downcase
+    when "sunday" then 0
+    when "monday" then 1
+    when "tuesday" then 2
+    when "wednesday" then 3
+    when "thursday" then 4
+    when "friday" then 5
+    when "saturday" then 6  
+    end
+  end
+
   def posts_from(day_of_week)
     count = 0
-    case day_of_week.downcase
-    when "sunday" then @wday = 0
-    when "monday" then @wday = 1
-    when "tuesday" then @wday = 2
-    when "wednesday" then @wday = 3
-    when "thursday" then @wday = 4
-    when "friday" then @wday = 5
-    when "saturday" then @wday = 6  
-    end
+
+    wday = get_wday(day_of_week)
+ 
     @data_source.each do |post|
-      if @wday == Time.parse(post.date_posted).wday
+      if wday == Time.parse(post.date_posted).wday
         count += 1
       end
     end
-    count
+    count / how_many(day_of_week)
+  end
+
+  #tells you how many mondays (for example) exists in the db
+  def how_many(day_of_week)
+    wday = get_wday(day_of_week)
+    @data_source.map {|post| Time.parse(post.date_posted).yday if Time.parse(post.date_posted).wday == wday }.compact.uniq.size
   end
 
   def post_count 
@@ -38,11 +52,12 @@ class PostData
   end
 
   def count_who_for_whom(who_for_whom)
-    Post.all.where("title like '% #{who_for_whom} %'").count
+    @data_source.where("title like '%#{who_for_whom}%'").count
   end
 
   def number_of_unspecified
-    Post.all.count - (count_who_for_whom('m4m') + count_who_for_whom('m4w') + count_who_for_whom('w4w') + count_who_for_whom('w4m'))
+    @data_source.count - (count_who_for_whom('m4m') + count_who_for_whom('m4w') + count_who_for_whom('w4w') + count_who_for_whom('w4m'))
   end
+
 
 end
